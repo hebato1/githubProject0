@@ -15,7 +15,7 @@ struct Box {
 struct ContentView: View {
     
     let boxes:[Box] = [
-        Box(id: 0, title1: "An unknown journeyblbalblalba", title2: "Story about him blabl albal balbla", imageURL: "zd1"),
+        Box(id: 0, title1: "An unknown journey", title2: "Story about him and her.", imageURL: "zd1"),
         Box(id: 1, title1: "Photo2", title2: "aaaa", imageURL: "zd2"),
         Box(id: 2, title1: "Photo3", title2: "aaaa", imageURL: "zd3"),
         Box(id: 3, title1: "Photo4", title2: "aaaa", imageURL: "zd4"),
@@ -23,7 +23,9 @@ struct ContentView: View {
     ]
     
     var body: some View {
-            
+        ZStack{
+            Color(red: 81/255, green: 113/255, blue: 116/255)
+                .ignoresSafeArea()
             VStack{
                 Text("Free stories")
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -36,13 +38,17 @@ struct ContentView: View {
                         ForEach(boxes, id: \.id) { box in
                             BoxView(box: box)
                         }
-                        .padding(5)
+                    }
+                    
                 }
-                
+                Spacer()
             }
-            }
-            .padding(20)
-            Spacer()
+            .padding(5)
+         
+        }
+        
+
+            
 
     }
     struct BoxView: View {
@@ -50,19 +56,26 @@ struct ContentView: View {
         
         
         var body: some View {
-            VStack{
-                Image(box.imageURL)
-                    .resizable()
-                    .frame(width: 150, height: 150)
-                    .cornerRadius(12)
-                Text(box.title1)
-                    .font(.system(size: 16, weight: .semibold))
-
-                Text(box.title2)
-                    .frame(width: 150)
-                    .font(.system(size: 8))
-
-                
+                VStack{
+                    Image(box.imageURL)
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .cornerRadius(12)
+                    Text(box.title1)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .font(.system(size: 12, weight: .semibold))
+                        .multilineTextAlignment(.leading)
+                        .frame(width: 150, alignment: .leading)
+                    
+                    
+                    
+                    Text(box.title2)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .font(.system(size: 8))
+                        .multilineTextAlignment(.leading)
+                        .frame(width: 150, alignment: .leading)
+                    
+                        
             }
         }
     }
